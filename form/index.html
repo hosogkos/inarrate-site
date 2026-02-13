@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex,nofollow" />
-  <title>Admin | Forms</title>
+  <title>Forms</title>
   <link rel="stylesheet" href="/style.css" />
 </head>
 
@@ -19,23 +19,12 @@
   </header>
 
   <main class="wrap">
-    <h1>管理者ページ（フォーム一覧）</h1>
-    <p class="hint">このページは管理者トークン必須。</p>
+    <h1>フォーム一覧（秘匿リンク）</h1>
+    <p class="hint">このページURL自体を配布しない。自分だけブックマーク運用。</p>
 
-    <div id="locked" style="display:none;">
-      <h2>アクセス不可</h2>
-      <p>URLに <code>?admin=...</code> が必要。</p>
-    </div>
-
-    <div id="ok" style="display:none;">
-      <h2>リンク一覧</h2>
-      <ul id="links"></ul>
-      <p class="hint">各リンクは <code>type</code> と <code>t</code> を含む。</p>
-    </div>
+    <ul id="links"></ul>
   </main>
 
   <script src="/form/admin.js"></script>
 </body>
 </html>
-
-

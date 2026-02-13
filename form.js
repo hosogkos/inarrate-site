@@ -1,18 +1,19 @@
 const FORMS = [
   {
     type: "1",
-    title: "prototype 1",
-    embed: "https://docs.google.com/forms/d/e/1FAIpQLSdTwBR45ejZOTUFz9oUM42TikrYDhIEJukUJ_DjSCFOcYlKdQ/viewform?usp=header/embedded=true"
+    title: "パターン1",
+    // 必ずこの形式：.../viewform?embedded=true
+    embed: "https://docs.google.com/forms/d/e/1FAIpQLSeYwtTcHw4pinEcXYnqBVR0r4MeExS_wniVCseeD91HReKQ6Q/viewform?embedded=true"
   },
-  // type: "2" ... を増やす
+  // 追加するならここに
+  // { type:"2", title:"パターン2", embed:"https://docs.google.com/forms/d/e/XXXX/viewform?embedded=true" },
 ];
 
 function getParam(name) {
   return new URL(location.href).searchParams.get(name);
 }
 
-const type = getParam("type") || "1"; // type無しはデフォで1に飛ばす（嫌なら消せ）
-
+const type = getParam("type") || "1";
 const pageTitle = document.getElementById("pageTitle");
 const formArea = document.getElementById("formArea");
 
@@ -20,18 +21,19 @@ const entry = FORMS.find(f => f.type === String(type));
 
 if (!entry) {
   pageTitle.textContent = "アクセス不可";
-  formArea.innerHTML = `<p class="hint">無効なtypeです。</p>`;
+  formArea.innerHTML = `<p class="hint">無効な <code>type</code> です。</p>`;
 } else {
   pageTitle.textContent = entry.title;
 
-  const openUrl = entry.embed.replace("embedded=true", ""); // 別タブ用
+  // embedded=true を外して通常表示URLへ
+  const openUrl = entry.embed.replace("embedded=true", "");
 
   formArea.innerHTML = `
     <div class="form-actions">
       <a class="btn" href="${openUrl}" target="_blank" rel="noopener">
         フォームを開く（別タブ）
       </a>
-      <p class="hint">埋め込みが表示されない場合は別タブで開いて。</p>
+      <p class="hint">Safariで埋め込みが表示されない場合は別タブで開いて。</p>
     </div>
 
     <iframe class="frame" src="${entry.embed}" loading="lazy"></iframe>
