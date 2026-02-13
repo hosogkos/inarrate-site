@@ -247,3 +247,44 @@ h1{
   margin: 0;
   padding: 14px 32px;
 }
+/* ===== admin page ui (append) ===== */
+.panel{ margin: 16px 0 24px; }
+.input{
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid rgba(0,0,0,0.18);
+  border-radius: 10px;
+}
+
+.list{ list-style: none; padding: 0; margin: 0; }
+.row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 12px;
+  border: 1px solid rgba(0,0,0,0.12);
+  border-radius: 14px;
+  margin-bottom: 12px;
+  background: rgba(255,255,255,0.65);
+}
+
+.row-left{ min-width: 0; }
+.row-title{ font-weight: 800; margin-bottom: 6px; }
+.row-url{
+  display: inline-block;
+  word-break: break-all;
+  color: #0f7f7a;
+  text-decoration: none;
+}
+.row-url:hover{ text-decoration: underline; }
+
+.btn2{
+  padding: 10px 14px;
+  border: 0;
+  border-radius: 10px;
+  background: #0f7f7a;
+  color: #fff;
+  font-weight: 800;
+  cursor: pointer;
+}

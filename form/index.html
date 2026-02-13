@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex,nofollow" />
-  <title>Forms</title>
+  <title>Forms Admin</title>
   <link rel="stylesheet" href="/style.css" />
 </head>
 
@@ -19,10 +19,16 @@
   </header>
 
   <main class="wrap">
-    <h1>フォーム一覧（秘匿リンク）</h1>
-    <p class="hint">このページURL自体を配布しない。自分だけブックマーク運用。</p>
+    <h1>フォーム管理（秘匿URL）</h1>
+    <p class="hint">このページURLは配らない。自分だけブックマーク。</p>
 
-    <ul id="links"></ul>
+    <div class="panel">
+      <label class="hint" for="baseUrl">公開ドメイン（自動）</label>
+      <input id="baseUrl" class="input" type="text" readonly />
+    </div>
+
+    <h2>リンク一覧</h2>
+    <ul id="links" class="list"></ul>
   </main>
 
   <script src="/form/admin.js"></script>
