@@ -288,3 +288,52 @@ h1{
   font-weight: 800;
   cursor: pointer;
 }
+/* ===== readable text layout (append) ===== */
+
+/* 本文の横幅を制限して読みやすく */
+.section,
+section {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* 見出し周りの余白統一 */
+section h2,
+section h3,
+.about-title,
+.section-title {
+  margin: 64px 0 18px;
+  letter-spacing: 0.18em;
+  line-height: 1.2;
+}
+
+/* 本文（日本語）の読みやすさ：行間・文字間・改行 */
+section p,
+.about-text,
+.about-items-text,
+.contact-text {
+  margin: 0 auto 18px;
+  line-height: 1.9;
+  letter-spacing: 0.02em;
+  text-align: left;              /* 長文は中央揃えやめる */
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+/* スマホ時はさらに詰める */
+@media (max-width: 600px) {
+  section h2, section h3,
+  .about-title, .section-title { margin-top: 44px; }
+
+  section p,
+  .about-text, .about-items-text, .contact-text {
+    line-height: 1.85;
+    font-size: 15px;
+  }
+}
+#about, #about-items, #contact {
+  text-align: left;
+}
