@@ -337,3 +337,47 @@ section p,
 #about, #about-items, #contact {
   text-align: left;
 }
+/* ----- readable text block (ABOUTなど本文用) ----- */
+.prose {
+  max-width: 720px;      /* 横幅を狭くして読みやすく */
+  margin: 0 auto;        /* センター寄せ */
+  line-height: 1.9;      /* 行間 */
+  font-size: 16px;
+}
+
+/* <p>内の改行を反映させる（HTMLの改行がそのまま表示される） */
+.prose p {
+  white-space: pre-line;
+}
+
+/* 箇条書き用（♦をやめてちゃんとリスト化するなら） */
+.prose ul {
+  margin: 12px 0 12px 1.2em;
+}
+.prose li {
+  margin: 6px 0;
+}
+/* ===== FIX: hero full-bleed (左右の白余白を強制排除) ===== */
+.hero{
+  width: 100vw;
+  max-width: none;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
+/* 念のため横スクロール防止 */
+html, body { overflow-x: hidden; }
+
+/* ===== ABOUTの横幅 + 改行を反映 ===== */
+#about p,
+#about-items p,
+#contact p{
+  max-width: 720px;        /* 好みで 680〜820 */
+  margin: 0 auto;
+  padding: 0 20px;
+  line-height: 1.9;
+  letter-spacing: 0.02em;
+  text-align: left;
+
+  white-space: pre-line;   /* ← 改行をそのまま表示 */
+}
