@@ -1,51 +1,64 @@
+/* =========================
+   Base / Reset
+========================= */
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { margin: 0; font-family: system-ui, -apple-system, "Hiragino Sans", "Noto Sans JP", sans-serif; }
+body{
+  margin: 0;
+  font-family: system-ui, -apple-system, "Hiragino Sans", "Noto Sans JP", sans-serif;
+  overflow-x: hidden; /* 横スクロール事故の保険 */
+}
 
+/* =========================
+   Topbar
+   - 要素(HTML)は変えず、見た目だけ安定させる
+========================= */
 .topbar{
   background: #0f7f7a;
   border-bottom: 2px solid rgba(0,0,0,0.15);
 }
 
 .topbar-inner{
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 12px 20px;
+  width: 100%;
+  max-width: none;        /* 端まで伸ばす（中身だけpaddingで調整） */
+  margin: 0;
+  padding: 14px 32px;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
+  gap: 16px;
 }
 
 .brand{
   color: #fff;
-  font-weight: 600;
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: 0.5px;
   font-size: 18px;
+  white-space: nowrap;
 }
 
 .nav{
   display: flex;
-  gap: 18px;
+  gap: 16px;
   flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 .nav a{
   color: #fff;
   text-decoration: none;
   font-weight: 600;
+  opacity: 0.95;
 }
-
 .nav a:hover{
+  opacity: 1;
   text-decoration: underline;
 }
 
-.brand { color: #fff; text-decoration: none; font-weight: 700; letter-spacing: 0.5px; }
-.nav { margin-left: auto; display: flex; gap: 16px; }
-.nav a { color: #fff; text-decoration: none; opacity: 0.9; }
-.nav a:hover { opacity: 1; }
-
-.menuBtn {
+/* モバイル用（JSで開閉する前提のまま残す） */
+.menuBtn{
   display: none;
   margin-left: auto;
   border: 1px solid rgba(255,255,255,0.35);
@@ -55,28 +68,36 @@ body { margin: 0; font-family: system-ui, -apple-system, "Hiragino Sans", "Noto 
   padding: 8px 10px;
   cursor: pointer;
 }
-
-.mobileNav {
-  max-width: 980px;
-  margin: 0 auto;
-  padding: 10px 20px 18px;
+.mobileNav{
+  max-width: none;
+  margin: 0;
+  padding: 10px 32px 18px;
   display: grid;
   gap: 10px;
+  background: #0f7f7a;
 }
-.mobileNav a { color: #fff; text-decoration: none; opacity: 0.95; }
+.mobileNav a{
+  color: #fff;
+  text-decoration: none;
+  opacity: 0.95;
+}
+.mobileNav a:hover{ opacity: 1; text-decoration: underline; }
 
-/* HERO */
+/* =========================
+   Hero
+========================= */
 .hero{
+  width: 100%;
   height: clamp(320px, 55vh, 520px);
   position: relative;
 
   background-image: url("images/S__199720977.jpg");
-  background-size: cover;          /* 余白を消すならcover */
-  background-position: center 45%; /* 見せたい位置。上下はここで調整 */
+  background-size: cover;
+  background-position: center 45%;
   background-repeat: no-repeat;
 }
 
-/* タイトル配置の土台：常に中央 */
+/* ヒーローの上に載せるレイヤー */
 .hero-overlay{
   position: absolute;
   inset: 0;
@@ -85,14 +106,9 @@ body { margin: 0; font-family: system-ui, -apple-system, "Hiragino Sans", "Noto 
   justify-content: center;
   text-align: center;
   padding: 0 20px;
-  background: linear-gradient(
-    to bottom,
-    rgba(0,0,0,0.25),
-    rgba(0,0,0,0.05)
-  );
+  background: linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(0,0,0,0.05));
 }
 
-/* HOMEの位置は transform で微調整（左ズレもこれで戻す） */
 .hero-title{
   margin: 0;
   color: #fff;
@@ -100,84 +116,116 @@ body { margin: 0; font-family: system-ui, -apple-system, "Hiragino Sans", "Noto 
   letter-spacing: 5px;
   text-shadow: 0 6px 22px rgba(0,0,0,0.35);
 
-  transform: translate(0px, -140px); /* ← Xが左ズレ修正、Yが上下 */
+  /* 位置調整はここだけ触ればOK */
+  transform: translate(0px, -140px);
 }
 
-
-.hero-sub {
+.hero-sub{
   margin: 10px 0 0;
   color: rgba(255,255,255,0.9);
 }
 
-.section { margin: 36px 0; }
-.section-title {
+/* =========================
+   Main Sections (Home)
+   ※ sectionタグ全体に max-width を当てない（hero切れ防止）
+========================= */
+.section{
+  max-width: 900px;
+  margin: 64px auto 0;
+  padding: 0 20px;
+}
+
+.section-title{
   text-align: center;
-  letter-spacing: 8px;
+  letter-spacing: 0.18em;
   font-weight: 600;
+  line-height: 1.2;
   margin: 0 0 18px;
 }
 
-.grid {
+/* 長文用（ABOUTなど） */
+.prose{
+  max-width: 720px;
+  margin: 0 auto;
+  line-height: 1.9;
+  letter-spacing: 0.02em;
+  text-align: left;
+  font-size: 16px;
+}
+.prose p{
+  margin: 0 0 16px;
+  white-space: pre-line; /* HTML内の改行を反映 */
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+/* =========================
+   Grid / Cards
+========================= */
+.grid{
   display: grid;
   gap: 18px;
   grid-template-columns: repeat(2, 1fr);
 }
-.card {
+
+.card{
   border: 1px solid #e8e8e8;
   border-radius: 16px;
   overflow: hidden;
+  background: #fff;
 }
-.card img { width: 100%; height: 240px; object-fit: cover; display: block; }
-.card-body { padding: 0px; }
-.card-body h3 { margin: 0 0 6px; }
-.card-body p { margin: 0; opacity: 0.8; }
 
-.footer {
+.card img{
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  display: block;
+}
+
+.card-body{ padding: 0px; }
+.card-body h3{ margin: 0 0 6px; }
+.card-body p{ margin: 0; opacity: 0.8; }
+
+.footer{
   padding: 30px;
   text-align: center;
   opacity: 0.7;
 }
 
-.is-hidden { display: none; }
+/* =========================
+   Generic helpers
+========================= */
+.is-hidden{ display: none; }
 
-/* responsive */
-@media (max-width: 820px) {
-  .grid { grid-template-columns: 1fr; }
-  .nav { display: none; }
-  .menuBtn { display: inline-block; }
-  .hero-title { font-size: 44px; }
+.btn{
+  display: inline-block;
+  padding: 10px 14px;
+  background: #0f7f7a;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  border-radius: 8px;
 }
+.btn:hover{ filter: brightness(0.95); }
 
-.btn:hover{
-  background:#f5f5f5;
+.btn2{
+  padding: 10px 14px;
+  border: 0;
+  border-radius: 10px;
+  background: #0f7f7a;
+  color: #fff;
+  font-weight: 800;
+  cursor: pointer;
 }
-.page{
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 40px 20px;
-}
+.btn2:hover{ filter: brightness(0.95); }
 
-.page-title{
-  margin: 0 0 10px;
-  font-size: 40px;
-}
-
-.page-lead{
-  margin: 0 0 24px;
-  opacity: 0.75;
-}
-.topbar-inner{
-  max-width: none;     /* ここがポイント */
-  margin: 0;
-  padding: 14px 32px;  /* 端の余白はこれで調整 */
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
+/* =========================
+   Form/Admin pages
+========================= */
 .wrap{
   max-width: 900px;
   margin: 0 auto;
-  padding: 28px 20px 60px; /* 上を縮めて、下は余裕 */
+  padding: 28px 20px 60px;
 }
 
 h1{
@@ -188,52 +236,10 @@ h1{
 .hint{
   margin: 0 0 18px;
   opacity: 0.7;
-}
-
-.form-actions{
-  margin: 8px 0 18px;
-}
-
-.btn{
-  display: inline-block;
-  padding: 10px 14px;
-  background: #0f7f7a;
-  color: #fff;
-  text-decoration: none;
-  font-weight: 700;
-  border-radius: 8px;
-}
-
-.frame{
-  width: 100%;
-  height: 1200px;
-  border: 0;
-}
-/* ===== common layout fix (append) ===== */
-.wrap{
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 28px 20px 60px;
-}
-
-.hint{
-  margin: 0 0 18px;
-  opacity: 0.7;
   text-decoration: none !important; /* 打ち消し線事故の保険 */
 }
 
-/* ===== form embed ===== */
 .form-actions{ margin: 8px 0 18px; }
-
-.btn{
-  display: inline-block;
-  padding: 10px 14px;
-  background: #0f7f7a;
-  color: #fff;
-  text-decoration: none;
-  font-weight: 700;
-  border-radius: 8px;
-}
 
 .frame{
   width: 100%;
@@ -241,13 +247,6 @@ h1{
   border: 0;
 }
 
-/* ===== topbar: make full width stable ===== */
-.topbar-inner{
-  max-width: none;
-  margin: 0;
-  padding: 14px 32px;
-}
-/* ===== admin page ui (append) ===== */
 .panel{ margin: 16px 0 24px; }
 .input{
   width: 100%;
@@ -268,7 +267,6 @@ h1{
   margin-bottom: 12px;
   background: rgba(255,255,255,0.65);
 }
-
 .row-left{ min-width: 0; }
 .row-title{ font-weight: 800; margin-bottom: 6px; }
 .row-url{
@@ -279,105 +277,20 @@ h1{
 }
 .row-url:hover{ text-decoration: underline; }
 
-.btn2{
-  padding: 10px 14px;
-  border: 0;
-  border-radius: 10px;
-  background: #0f7f7a;
-  color: #fff;
-  font-weight: 800;
-  cursor: pointer;
-}
-/* ===== readable text layout (append) ===== */
-
-/* 本文の横幅を制限して読みやすく */
-.section,
-section {
-  max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 20px;
-  padding-right: 20px;
+/* =========================
+   Responsive
+========================= */
+@media (max-width: 820px){
+  .grid{ grid-template-columns: 1fr; }
+  .nav{ display: none; }
+  .menuBtn{ display: inline-block; }
+  .hero-title{ font-size: 44px; }
+  .topbar-inner{ padding: 12px 18px; }
+  .mobileNav{ padding: 10px 18px 18px; }
 }
 
-/* 見出し周りの余白統一 */
-section h2,
-section h3,
-.about-title,
-.section-title {
-  margin: 64px 0 18px;
-  letter-spacing: 0.18em;
-  line-height: 1.2;
-}
-
-/* 本文（日本語）の読みやすさ：行間・文字間・改行 */
-section p,
-.about-text,
-.about-items-text,
-.contact-text {
-  margin: 0 auto 18px;
-  line-height: 1.9;
-  letter-spacing: 0.02em;
-  text-align: left;              /* 長文は中央揃えやめる */
-  word-break: break-word;
-  overflow-wrap: anywhere;
-}
-
-/* スマホ時はさらに詰める */
-@media (max-width: 600px) {
-  section h2, section h3,
-  .about-title, .section-title { margin-top: 44px; }
-
-  section p,
-  .about-text, .about-items-text, .contact-text {
-    line-height: 1.85;
-    font-size: 15px;
-  }
-}
-#about, #about-items, #contact {
-  text-align: left;
-}
-/* ----- readable text block (ABOUTなど本文用) ----- */
-.prose {
-  max-width: 720px;      /* 横幅を狭くして読みやすく */
-  margin: 0 auto;        /* センター寄せ */
-  line-height: 1.9;      /* 行間 */
-  font-size: 16px;
-}
-
-/* <p>内の改行を反映させる（HTMLの改行がそのまま表示される） */
-.prose p {
-  white-space: pre-line;
-}
-
-/* 箇条書き用（♦をやめてちゃんとリスト化するなら） */
-.prose ul {
-  margin: 12px 0 12px 1.2em;
-}
-.prose li {
-  margin: 6px 0;
-}
-/* ===== FIX: hero full-bleed (左右の白余白を強制排除) ===== */
-.hero{
-  width: 100vw;
-  max-width: none;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-}
-
-/* 念のため横スクロール防止 */
-html, body { overflow-x: hidden; }
-
-/* ===== ABOUTの横幅 + 改行を反映 ===== */
-#about p,
-#about-items p,
-#contact p{
-  max-width: 720px;        /* 好みで 680〜820 */
-  margin: 0 auto;
-  padding: 0 20px;
-  line-height: 1.9;
-  letter-spacing: 0.02em;
-  text-align: left;
-
-  white-space: pre-line;   /* ← 改行をそのまま表示 */
+@media (max-width: 600px){
+  .section{ margin-top: 44px; }
+  h1{ font-size: 32px; }
+  .prose{ font-size: 15px; line-height: 1.85; }
 }
