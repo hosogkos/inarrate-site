@@ -3,11 +3,14 @@ const FORMS = [
     type: "1",
     title: "パターン1",
     // 必ずこの形式：.../viewform?embedded=true
-    embed: "https://docs.google.com/forms/d/e/1FAIpQLSeYwtTcHw4pinEcXYnqBVR0r4MeExS_wniVCseeD91HReKQ6Q/viewform?embedded=true"
+    embed: "https://docs.google.com/forms/d/e/1FAIpQLSdTwBR45ejZOTUFz9oUM42TikrYDhIEJukUJ_DjSCFOcYlKdQ/viewform?usp=header/embedded=true"
   },
-  // 追加するならここに
-  // { type:"2", title:"パターン2", embed:"https://docs.google.com/forms/d/e/XXXX/viewform?embedded=true" },
-];
+  {
+    type: "2",
+    title: "パターン2",
+    embed: "https://docs.google.com/forms/d/e/1FAIpQLSfJYXgkllCg0QY_9kETgitjD-Mor4szAFpzJqQk7-0dQYC9lw/viewform?usp=header/embedded=true"
+  }
+]
 
 function getParam(name) {
   return new URL(location.href).searchParams.get(name);
