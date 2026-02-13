@@ -1,7 +1,7 @@
 const FORMS = [
   {
     type: "1",
-    title: "Type 1",
+    title: "type 1",
     // 必ずこの形式：.../viewform?embedded=true
     embed: "https://docs.google.com/forms/d/e/1FAIpQLSdTwBR45ejZOTUFz9oUM42TikrYDhIEJukUJ_DjSCFOcYlKdQ/viewform?usp=header/embedded=true"
   },
