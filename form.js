@@ -151,7 +151,7 @@ if (!entry) {
       <a class="btn" href="${openUrl}" target="_blank" rel="noopener">
         フォームを開く（別タブ）
       </a>
-      <p class="hint">Safariで埋め込みが表示されない場合は別タブで開いて。</p>
+      <p class="hint"></p>
     </div>
 
     <iframe class="frame" src="${entry.embed}" loading="lazy"></iframe>
