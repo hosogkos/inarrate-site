@@ -27,7 +27,7 @@ if (admin !== ADMIN_TOKEN) {
   // form/ 配下からは ../form.html に飛ばす
   for (const f of FORMS) {
     const a = document.createElement("a");
-    a.href = `../form.html?type=${encodeURIComponent(f.type)}&t=${encodeURIComponent(f.t)}`;
+    a.href = `/form.html?type=${encodeURIComponent(f.type)}`;
     a.textContent = `${f.label}（type=${f.type}）`;
 
     const li = document.createElement("li");
