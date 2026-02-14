@@ -5,26 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex,nofollow" />
   <title>Form</title>
-  <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .frame { width: 100%; height: min(900px, 85vh); border: 0; }
+    .hint { opacity: .75; font-size: 14px; }
+  </style>
 </head>
-
 <body>
-  <header class="topbar">
-    <div class="topbar-inner">
-      <a class="brand" href="/">INARRATE</a>
-
-      <nav class="nav">
-        <a href="/">HOME</a>
-      </nav>
-    </div>
-  </header>
-
   <main class="wrap">
-    <h1 id="pageTitle"></h1>
-    <p class="hint"></p>
-    <div id="formArea"></div>
+    <h1 id="pageTitle">Form</h1>
+    <p class="hint">URLの <code>?type=</code> と <code>&t=</code> で切替。</p>
+
+    <div style="margin:14px 0;">
+      <a id="homeBtn" class="btn btn-ghost" href="./">← 戻る</a>
+    </div>
+
+    <div id="formArea" class="card">
+      <div id="locked" style="display:none;">
+        <h2>アクセス不可</h2>
+        <p>正しい <code>?type=</code> と <code>&t=</code> が必要です。</p>
+      </div>
+
+      <div id="ok" style="display:none;">
+        <a id="openInNew" class="btn" href="#" target="_blank" rel="noopener">フォームを開く（別タブ）</a>
+        <p class="hint" style="margin-top:8px;">埋め込みが表示されない場合は別タブで開いて。</p>
+        <div id="embed" style="margin-top:14px;"></div>
+      </div>
+    </div>
   </main>
 
-  <script src="/form.js"></script>
+  <script src="form.js"></script>
 </body>
 </html>
